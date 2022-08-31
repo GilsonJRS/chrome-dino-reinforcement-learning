@@ -1,6 +1,8 @@
 from torch import nn 
 import copy
 
+from torch.nn.modules.activation import ReLU
+
 class DinoNet(nn.Module):
     def __init__(self,input_dim, output_dim):
         super().__init__()
@@ -14,10 +16,25 @@ class DinoNet(nn.Module):
             nn.Conv2d(in_channels=64, out_channels=64, kernel_size=3, stride=1),
             nn.ReLU(),
             nn.Flatten(),
-            nn.Linear(3136,512),
+            nn.Linear(12544,512),
             nn.ReLU(),
             nn.Linear(512, output_dim)
         )
+
+        #self.qnet = nn.Sequential(
+        #    nn.Conv2d(in_channels=channels, out_channels=32, kernel_size=8, stride=4),
+        #    nn.ReLU(),
+        #    nn.Conv2d(in_channels=32, out_channels=64, kernel_size=4, stride=2),
+        #    nn.ReLU(),
+        #    nn.Conv2d(in_channels=64, out_channels=64, kernel_size=3, stride=1),
+        #    nn.ReLU(),
+        #    nn.Flatten(),
+        #    nn.Linear(16128,2048),
+        #    nn.ReLU(),
+        #    nn.Linear(2048, 512),
+        #    nn.ReLU(),
+        #    nn.Linear(512, output_dim)
+        #)
 
         self.qhatnet = copy.deepcopy(self.qnet)
         for p in self.qhatnet.parameters():

@@ -1,0 +1,8 @@
+matplotlib>=3.5.2
+mss>=6.1.0
+numpy>=1.23.1
+Pillow>=9.2.0
+selenium>=4.4.2
+torch>=1.12.1+cpu
+tqdm>=4.64.0
+webdriver_manager>=3.8.3
